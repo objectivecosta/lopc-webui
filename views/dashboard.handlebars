@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/static/css/dashboard.css" media="screen" charset="utf-8">
+<h1>Compose new push</h1>
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Choose app
+    <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    {{li_apps}}
+    <li><a href="#sampleApp">Sample app</a></li>
+  </ul>
+</div>
+
+<form id="pushForm">
+  <div class="input-group input-group-lg">
+    <span class="input-group-addon" id="sizing-addon1">Query Selector</span>
+    <textarea rows="4" cols="120" name="query" form="pushForm"></textarea>
+  </div>
+
+  <div class="input-group input-group-lg">
+    <span class="input-group-addon" id="sizing-addon1">Push Payload</span>
+    <textarea rows="4" cols="120" name="payload" form="pushForm"></textarea>
+  </div>
+</form>
