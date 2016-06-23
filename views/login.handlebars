@@ -5,10 +5,13 @@
   <input type="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
   <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+  <label for="inputInstance" class="sr-only">Instance URL</label>
+  <input type="url" id="inputInstance" class="form-control" placeholder="Instance URL" required>
   <div class="checkbox">
     <label>
       <input type="checkbox" value="remember-me"> Remember me
     </label>
   </div>
-  <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
+  <button onclick="login();" class="btn btn-lg btn-success btn-block">Sign in</button>
 </form>
+<script src="/static/js/login.js" charset="utf-8"></script>

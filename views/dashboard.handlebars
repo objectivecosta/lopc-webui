@@ -12,14 +12,67 @@
   </ul>
 </div>
 
-<form id="pushForm">
-  <div class="input-group input-group-lg">
-    <span class="input-group-addon" id="sizing-addon1">Query Selector</span>
-    <textarea rows="4" cols="120" name="query" form="pushForm"></textarea>
-  </div>
+<form class="pushForm">
+  <h2>Query:</h2>
+  <div id="queryControl">
+    <button onclick="removeQueryField();" class="btn btn-default" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Remove Query Field
+    </button>
 
-  <div class="input-group input-group-lg">
-    <span class="input-group-addon" id="sizing-addon1">Push Payload</span>
-    <textarea rows="4" cols="120" name="payload" form="pushForm"></textarea>
+    <button onclick="addQueryField();" class="btn btn-default" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Add Query Field
+    </button>
+
+    <button onclick="refreshQueryAudience();" class="btn btn-default" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+    </button>
   </div>
+  <div class="queryForm">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-addon" id="sizing-addon2">Query field</span>
+          <input type="text" id="queryField" class="form-control" aria-label="...">
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+      <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-addon" id="sizing-addon2">Query value</span>
+          <input type="text" id="queryValue" class="form-control" aria-label="...">
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+  </div><!-- /.queryForm -->
+  <h3 class="expectedAudience">Expected audience size: unknown</h3>
+  <h2>Payload:</h2>
+  <div id="payloadControl">
+    <button class="btn btn-default" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Remove Payload Field
+    </button>
+
+    <button class="btn btn-default" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Add Payload Field
+    </button>
+  </div>
+  <div class="payloadForm">
+    <div class="input-group">
+      <span class="input-group-addon" id="sizing-addon2">Alert </span>
+      <input type="text" class="form-control" aria-label="...">
+    </div><!-- /input-group -->
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-addon" id="sizing-addon2">Payload field</span>
+          <input type="text" class="form-control" aria-label="...">
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+      <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-addon" id="sizing-addon2">Payload value</span>
+          <input type="text" class="form-control" aria-label="...">
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+  </div><!-- /.payloadForm -->
 </form>
+<script src="/static/js/dashboard.js" charset="utf-8"></script>
