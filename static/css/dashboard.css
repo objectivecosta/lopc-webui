@@ -16,6 +16,11 @@ div .pushForm {
   font-family: 'Inconsolata';
 }
 
+#dashboardBottom {
+  margin: 20px;
+  text-align: center;
+}
+
 .expectedAudience {
   width: 100%;
   text-align: center;

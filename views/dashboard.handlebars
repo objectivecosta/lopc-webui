@@ -6,24 +6,32 @@
     <span class="caret"></span>
   </button>
 
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    {{li_apps}}
-    <li><a href="#sampleApp">Sample app</a></li>
+  <ul id="appsDropdown" class="dropdown-menu" aria-labelledby="dropdownMenu1">
   </ul>
 </div>
+
+<div class="input-group" style="display: none;">
+  <span class="input-group-addon" id="sizing-addon2">App ID</span>
+  <input type="text" id="appIdField" class="form-control" aria-label="...">
+</div><!-- /input-group -->
+
+<div class="input-group">
+  <span class="input-group-addon" id="sizing-addon2">App</span>
+  <input disabled type="text" id="appTitleField" class="form-control" aria-label="...">
+</div><!-- /input-group -->
 
 <form class="pushForm">
   <h2>Query:</h2>
   <div id="queryControl">
-    <button onclick="removeQueryField();" class="btn btn-default" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <button onclick="removeQueryField();" class="btn btn-default" type="button" aria-haspopup="true" aria-expanded="true">
       Remove Query Field
     </button>
 
-    <button onclick="addQueryField();" class="btn btn-default" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <button onclick="addQueryField();" class="btn btn-default" type="button" aria-haspopup="true" aria-expanded="true">
       Add Query Field
     </button>
 
-    <button onclick="refreshQueryAudience();" class="btn btn-default" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <button onclick="refreshQueryAudience();" class="btn btn-default" type="button" aria-haspopup="true" aria-expanded="true">
       <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
     </button>
   </div>
@@ -46,33 +54,38 @@
   <h3 class="expectedAudience">Expected audience size: unknown</h3>
   <h2>Payload:</h2>
   <div id="payloadControl">
-    <button class="btn btn-default" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <button onclick="removePayloadField();" class="btn btn-default" type="button" aria-haspopup="true" aria-expanded="true">
       Remove Payload Field
     </button>
 
-    <button class="btn btn-default" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <button onclick="addPayloadField();" class="btn btn-default" type="button" aria-haspopup="true" aria-expanded="true">
       Add Payload Field
     </button>
   </div>
   <div class="payloadForm">
     <div class="input-group">
       <span class="input-group-addon" id="sizing-addon2">Alert </span>
-      <input type="text" class="form-control" aria-label="...">
+      <input type="text" id="payloadAlert" class="form-control" aria-label="...">
     </div><!-- /input-group -->
     <div class="row">
       <div class="col-lg-6">
         <div class="input-group">
           <span class="input-group-addon" id="sizing-addon2">Payload field</span>
-          <input type="text" class="form-control" aria-label="...">
+          <input type="text" id="payloadField" class="form-control" aria-label="...">
         </div><!-- /input-group -->
       </div><!-- /.col-lg-6 -->
       <div class="col-lg-6">
         <div class="input-group">
           <span class="input-group-addon" id="sizing-addon2">Payload value</span>
-          <input type="text" class="form-control" aria-label="...">
+          <input type="text" id="payloadValue" class="form-control" aria-label="...">
         </div><!-- /input-group -->
       </div><!-- /.col-lg-6 -->
     </div><!-- /.row -->
   </div><!-- /.payloadForm -->
+  <div id="dashboardBottom">
+    <button onclick="fireTheIonCannon();" class="btn btn-danger btn-lg" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      FIRE THE ION CANNON!
+    </button>
+  </div>
 </form>
 <script src="/static/js/dashboard.js" charset="utf-8"></script>
