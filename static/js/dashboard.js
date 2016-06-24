@@ -5,7 +5,7 @@ $(document).ready(function () {
 
   var authenticationData = Cookies.get("authenticationData");
   if (!authenticationData || authenticationData.indexOf("%***&&&***%") == -1) {
-    window.location = "/";
+    window.location.href = "/";
   }
 
   var authenticationData = Cookies.get("authenticationData");
