@@ -112,6 +112,16 @@ function fireTheIonCannon() {
 
   var appId = $("#appIdField").val();
 
+  if (!appId || appId.length == 0) {
+    swal({
+      title: "Did not send",
+      text: "<h3>No app selected.</h3>",
+      type:"error",
+      html: true
+    });
+    return;
+  }
+
   var query = {};
 
   var shouldReturnPrematurely = false;
