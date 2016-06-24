@@ -1,5 +1,5 @@
 'use strict';
-
+var pushEstimatedAudience = -1;
 $(document).ready(function () {
   console.log("Document is ready!");
 
@@ -51,7 +51,6 @@ function refreshQueryAudience() {
     var value = $(this).find('#queryValue').first().val();
 
     if (field.length == 0 || value.length == 0) {
-      alertify.alert("Error: one (or more) of the query fields/values are empty.");
       shouldReturnPrematurely = true;
     }
     query[field] = value;
@@ -71,6 +70,7 @@ function refreshQueryAudience() {
     success: function (data) {
       console.log("Data: " + JSON.stringify(data));
       $(".expectedAudience").html("Expected audience size: " + data.length);
+      pushEstimatedAudience = data.length;
     }
   });
 
@@ -119,7 +119,7 @@ function fireTheIonCannon() {
     var value = $(this).find('#queryValue').first().val();
 
     if (field.length == 0 || value.length == 0) {
-      alertify.alert("Error: one (or more) of the query fields/values are empty.");
+      swal("Error: one (or more) of the query fields/values are empty.");
       shouldReturnPrematurely = true;
     }
     query[field] = value;
@@ -130,7 +130,7 @@ function fireTheIonCannon() {
   var alertText = $('.payloadForm').find('#payloadAlert').first().val();
 
   if (alertText.length == 0) {
-    alertify.alert("Alert cannot be empty");
+    swal("Did not send", "Alert text cannot be empty", "error");
     shouldReturnPrematurely = true;
   }
 
@@ -141,7 +141,7 @@ function fireTheIonCannon() {
     var value = $(this).find('#payloadValue').first().val();
 
     if (field.length == 0 || value.length == 0) {
-      alertify.alert("Error: one (or more) of the payload fields/values are empty.");
+      swal("Did not send", "One (or more) of the payload fields/values are empty.", "error");
       shouldReturnPrematurely = true;
     }
     payload[field] = value;
@@ -153,16 +153,28 @@ function fireTheIonCannon() {
 
   console.log('JSON: ' + JSON.stringify({query: query, payload : payload}));
 
-  $.ajax({
-    url: "http://" + instance + "/push?appId=" + appId ,
-    type: 'post',
-    data: JSON.stringify({query: query, payload : payload}),
-    headers: {},
-    contentType: "application/json",
-    dataType: 'json',
-    success: function (data) {
-      console.log("Data: " + JSON.stringify(data));
-    }
+  swal({
+    title: "Are you sure you want to send those pushes?",
+    text: "Alert: " + alertText + "\nRecipients: " + pushEstimatedAudience,
+    type: "info",
+    showCancelButton: true,
+    closeOnConfirm: false,
+    showLoaderOnConfirm: true,
+    },
+    function(){
+      $.ajax({
+        url: "http://" + instance + "/push?appId=" + appId ,
+        type: 'post',
+        data: JSON.stringify({query: query, payload : payload}),
+        headers: {},
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (data) {
+          swal("Push fired", "The request was made to the specified LOPC instance!", "success");
+        }
+      });
   });
+
+
 
 }

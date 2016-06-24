@@ -2,13 +2,13 @@
   <div class="col-lg-6">
     <div class="input-group">
       <span class="input-group-addon" id="sizing-addon2">Query field*</span>
-      <input type="text" id="queryField" class="form-control" aria-label="...">
+      <input onchange="refreshQueryAudience();" type="text" id="queryField" class="form-control" aria-label="...">
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
   <div class="col-lg-6">
     <div class="input-group">
       <span class="input-group-addon" id="sizing-addon2">Query value*</span>
-      <input type="text" id="queryValue" class="form-control" aria-label="...">
+      <input onchange="refreshQueryAudience();" type="text" id="queryValue" class="form-control" aria-label="...">
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
