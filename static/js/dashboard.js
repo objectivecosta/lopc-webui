@@ -20,6 +20,8 @@ $(document).ready(function () {
       $('#appsDropdown').append(`<li><a data-appid='${app.appId}' onclick='selectApp(this);'>${app.name}</a></li>`);
     }
   });
+
+  refreshQueryAudience();
 });
 
 function selectApp(sender) {
@@ -119,7 +121,12 @@ function fireTheIonCannon() {
     var value = $(this).find('#queryValue').first().val();
 
     if (field.length == 0 || value.length == 0) {
-      swal("Error: one (or more) of the query fields/values are empty.");
+      swal({
+        title: "Did not send",
+        text: "<h3>Error: one (or more) of the query fields/values are empty.</h3>",
+        type:"error",
+        html: true
+      });
       shouldReturnPrematurely = true;
     }
     query[field] = value;
@@ -130,7 +137,12 @@ function fireTheIonCannon() {
   var alertText = $('.payloadForm').find('#payloadAlert').first().val();
 
   if (alertText.length == 0) {
-    swal("Did not send", "Alert text cannot be empty", "error");
+    swal({
+      title: "Did not send",
+      text: "<h3>Alert text cannot be empty</h3>",
+      type:"error",
+      html: true
+    });
     shouldReturnPrematurely = true;
   }
 
@@ -141,7 +153,12 @@ function fireTheIonCannon() {
     var value = $(this).find('#payloadValue').first().val();
 
     if (field.length == 0 || value.length == 0) {
-      swal("Did not send", "One (or more) of the payload fields/values are empty.", "error");
+      swal({
+        title: "Did not send",
+        text: "<h3>One (or more) of the payload fields/values are empty.</h3>",
+        type:"error",
+        html: true
+      });
       shouldReturnPrematurely = true;
     }
     payload[field] = value;
@@ -155,11 +172,12 @@ function fireTheIonCannon() {
 
   swal({
     title: "Are you sure you want to send those pushes?",
-    text: "Alert: " + alertText + "\nRecipients: " + pushEstimatedAudience,
+    text: "<h4>Alert: '" + alertText + "'<br><br>Recipients: " + pushEstimatedAudience + "</h4>",
     type: "info",
     showCancelButton: true,
     closeOnConfirm: false,
     showLoaderOnConfirm: true,
+    html: true
     },
     function(){
       $.ajax({
@@ -170,7 +188,12 @@ function fireTheIonCannon() {
         contentType: "application/json",
         dataType: 'json',
         success: function (data) {
-          swal("Push fired", "The request was made to the specified LOPC instance!", "success");
+          swal({
+            title: "Push sent!",
+            text: "<h3>The request was made to the specified LOPC instance!</h3>",
+            type:"success",
+            html: true
+          });
         }
       });
   });
