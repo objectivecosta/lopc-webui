@@ -14,7 +14,7 @@ $(document).ready(function () {
   var password = data[1];
   var instance = data[2];
 
-  $.get("http://" + instance + "/apps?username=" + username, function (data) {
+  $.get("https://" + instance + "/apps?username=" + username, function (data) {
     var appList = data.appList;
     for (var app of appList) {
       $('#appsDropdown').append(`<li><a data-appid='${app.appId}' onclick='selectApp(this);'>${app.name}</a></li>`);
@@ -63,7 +63,7 @@ function refreshQueryAudience() {
   }
 
   $.ajax({
-    url: "http://" + instance + "/device/query",
+    url: "https://" + instance + "/device/query",
     type: 'post',
     data: JSON.stringify({query: query}),
     headers: {},
@@ -191,7 +191,7 @@ function fireTheIonCannon() {
     },
     function(){
       $.ajax({
-        url: "http://" + instance + "/push?appId=" + appId ,
+        url: "https://" + instance + "/push?appId=" + appId ,
         type: 'post',
         data: JSON.stringify({query: query, payload : payload}),
         headers: {},
