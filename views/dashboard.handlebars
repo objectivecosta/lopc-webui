@@ -1,23 +1,23 @@
 <link rel="stylesheet" href="/static/css/dashboard.css" media="screen" charset="utf-8">
 <h1>Compose new push</h1>
-<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    Choose app
-    <span class="caret"></span>
-  </button>
 
-  <ul id="appsDropdown" class="dropdown-menu" aria-labelledby="dropdownMenu1">
-  </ul>
-</div>
+<div class="input-group">
+  <div class="input-group-btn">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Choose app
+      <span class="caret"></span>
+    </button>
+
+    <ul id="appsDropdown" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    </ul>
+  </div><!-- /btn-group -->
+  <input disabled type="text" id="appTitleField" class="form-control" aria-label="...">
+</div><!-- /input-group -->
+
 
 <div class="input-group" style="display: none;">
   <span class="input-group-addon" id="sizing-addon2">App ID</span>
   <input type="text" id="appIdField" class="form-control" aria-label="...">
-</div><!-- /input-group -->
-
-<div class="input-group">
-  <span class="input-group-addon" id="sizing-addon2">App</span>
-  <input disabled type="text" id="appTitleField" class="form-control" aria-label="...">
 </div><!-- /input-group -->
 
 <form class="pushForm">
@@ -36,20 +36,7 @@
     </button>
   </div>
   <div class="queryForm">
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="input-group">
-          <span class="input-group-addon" id="sizing-addon2">Query field</span>
-          <input type="text" id="queryField" class="form-control" aria-label="...">
-        </div><!-- /input-group -->
-      </div><!-- /.col-lg-6 -->
-      <div class="col-lg-6">
-        <div class="input-group">
-          <span class="input-group-addon" id="sizing-addon2">Query value</span>
-          <input type="text" id="queryValue" class="form-control" aria-label="...">
-        </div><!-- /input-group -->
-      </div><!-- /.col-lg-6 -->
-    </div><!-- /.row -->
+    <h2 class='queryAll'>All</h2>
   </div><!-- /.queryForm -->
   <h3 class="expectedAudience">Expected audience size: unknown</h3>
   <h2>Payload:</h2>
@@ -64,28 +51,15 @@
   </div>
   <div class="payloadForm">
     <div class="input-group">
-      <span class="input-group-addon" id="sizing-addon2">Alert </span>
+      <span class="input-group-addon" id="sizing-addon2">Alert*</span>
       <input type="text" id="payloadAlert" class="form-control" aria-label="...">
     </div><!-- /input-group -->
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="input-group">
-          <span class="input-group-addon" id="sizing-addon2">Payload field</span>
-          <input type="text" id="payloadField" class="form-control" aria-label="...">
-        </div><!-- /input-group -->
-      </div><!-- /.col-lg-6 -->
-      <div class="col-lg-6">
-        <div class="input-group">
-          <span class="input-group-addon" id="sizing-addon2">Payload value</span>
-          <input type="text" id="payloadValue" class="form-control" aria-label="...">
-        </div><!-- /input-group -->
-      </div><!-- /.col-lg-6 -->
-    </div><!-- /.row -->
   </div><!-- /.payloadForm -->
   <div id="dashboardBottom">
     <button onclick="fireTheIonCannon();" class="btn btn-danger btn-lg" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
       FIRE THE ION CANNON!
     </button>
   </div>
+  <p>* = required fields
 </form>
 <script src="/static/js/dashboard.js" charset="utf-8"></script>

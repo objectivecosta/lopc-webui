@@ -1,3 +1,5 @@
+'use strict';
+
 $(document).ready(function () {
   console.log("Document is ready!");
 
@@ -6,8 +8,18 @@ $(document).ready(function () {
     window.location = "/";
   }
 
-  // Setup dropdown
-  // TODO: Insert thingy from Telegram
+  var authenticationData = Cookies.get("authenticationData");
+  var data = authenticationData.split("%***&&&***%");
+  var username = data[0];
+  var password = data[1];
+  var instance = data[2];
+
+  $.get("http://" + instance + "/apps?username=" + username, function (data) {
+    var appList = data.appList;
+    for (var app of appList) {
+      $('#appsDropdown').append(`<li><a data-appid='${app.appId}' onclick='selectApp(this);'>${app.name}</a></li>`);
+    }
+  });
 });
 
 function selectApp(sender) {
