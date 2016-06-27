@@ -69,3 +69,10 @@ div .payloadForm {
   color: #6f5499;
   box-shadow: rgba(136, 136, 136, 0.368627) 0px 2px 5px;
 }
+
+.checkBox {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 5px;
+}

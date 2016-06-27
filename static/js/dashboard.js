@@ -104,6 +104,9 @@ function removeQueryField() {
 }
 
 function fireTheIonCannon() {
+
+  var increaseBadge = $("#payloadIncreaseBadge").is(":checked");
+
   var authenticationData = Cookies.get("authenticationData");
   var data = authenticationData.split("%***&&&***%");
   var username = data[0];
@@ -157,6 +160,7 @@ function fireTheIonCannon() {
   }
 
   payload.alert = alertText;
+  if (increaseBadge == true) payload.badge = "+";
 
   $('.payloadForm').children('.row').each(function () {
     var field = $(this).find('#payloadField').first().val();
