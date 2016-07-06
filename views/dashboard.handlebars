@@ -26,22 +26,11 @@
 
 <form class="pushForm">
   <h2>Query:</h2>
-  <div id="queryControl">
-    <button onclick="removeQueryField();" class="btn btn-default" type="button" aria-haspopup="true" aria-expanded="true">
-      Remove Query Field
-    </button>
 
-    <button onclick="addQueryField();" class="btn btn-default" type="button" aria-haspopup="true" aria-expanded="true">
-      Add Query Field
-    </button>
-
-    <button onclick="refreshQueryAudience();" class="btn btn-default" type="button" aria-haspopup="true" aria-expanded="true">
-      <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-    </button>
+  <div class="queryEditor">
+    <textarea class="queryEditorTextArea"></textarea>
   </div>
-  <div class="queryForm">
-    <h2 class='queryAll'>All</h2>
-  </div><!-- /.queryForm -->
+
   <h3 class="expectedAudience">Expected audience size: unknown</h3>
   <h2>Payload:</h2>
   <div id="payloadControl">
