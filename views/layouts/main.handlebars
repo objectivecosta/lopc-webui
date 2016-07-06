@@ -45,13 +45,18 @@
   <script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/alertify.js"></script>
 
   <script>
+  var codeEditor;
   var editorTextArea = $(".queryEditorTextArea")[0];
   if (editorTextArea) {
-    CodeMirror.fromTextArea(editorTextArea, {
+    var codeEditor = CodeMirror.fromTextArea(editorTextArea, {
       lineNumbers: true,
       tabSize: 4,
       smartIndent: true,
       matchBrackets: true,
+    });
+
+    codeEditor.on('change', function (e, t) {
+      refreshQueryAudience();
     });
   }
   </script>

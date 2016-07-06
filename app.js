@@ -15,5 +15,6 @@ app.get("/dashboard", function (req, res) {
   res.render("dashboard", {title : "Dashboard"});
 });
 
-console.log("Will start listening on port 3001");
-global.app.listen(3001);
+global.app.listen(3001, function () {
+  console.log("LOPC Web UI listening on port 3001");
+});

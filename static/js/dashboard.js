@@ -22,9 +22,6 @@ $(document).ready(function () {
   });
 
   refreshQueryAudience();
-  $('.queryEditorTextArea').on('change',function(){
-    refreshQueryAudience();
-  });
 });
 
 function selectApp(sender) {
@@ -49,23 +46,8 @@ function refreshQueryAudience() {
   var query = {};
 
   var shouldReturnPrematurely = false;
-  //
-  // $('.queryForm').children('.row').each(function () {
-  //   console.log('NCH: ' + $(this).children().length);
-  //   var field = $(this).find('#queryField').first().val();
-  //   var value = $(this).find('#queryValue').first().val();
-  //
-  //   if (field.length == 0 || value.length == 0) {
-  //     shouldReturnPrematurely = true;
-  //   }
-  //   query[field] = value;
-  // });
-  //
-  // if (shouldReturnPrematurely == true) {
-  //   return;
-  // }
 
-  var query = $(".queryEditorTextArea").val();
+  var query = codeEditor.getValue();
   console.log("Typed query: " + query);
   if (!query  || query.length == 0) query = "{}"
   query = JSON.parse(query);
