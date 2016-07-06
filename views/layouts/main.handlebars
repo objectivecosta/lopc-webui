@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/static/css/main.css" media="screen" charset="utf-8">
   <link rel="stylesheet" href="/static/css/sweetalert.css" media="screen" charset="utf-8">
   <link rel="stylesheet" href="/static/css/codemirror.css">
+  <link rel="stylesheet" href="/static/css/switchery.min.css">
   <meta charset="utf-8">
   <title>LOPC - {{title}}</title>
 </head>
@@ -42,23 +43,42 @@
   <script src="/static/js/codemirror.js"></script>
   <script src="/static/js/codemirror/matchbrackets.js"></script>
   <script src="/static/js/codemirror/javascript.js"></script>
+  <script src="/static/js/switchery.min.js"></script>
   <script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/alertify.js"></script>
 
   <script>
-  var codeEditor;
-  var editorTextArea = $(".queryEditorTextArea")[0];
-  if (editorTextArea) {
-    var codeEditor = CodeMirror.fromTextArea(editorTextArea, {
+
+  var elem = document.querySelector('.js-switch');
+  var init = new Switchery(elem);
+
+  var queryEditor;
+  var queryEditorTextArea = $(".queryEditorTextArea")[0];
+
+  var payloadEditor;
+  var payloadEditorTextArea = $(".payloadEditorTextArea")[0];
+
+  if (queryEditorTextArea) {
+    queryEditor = CodeMirror.fromTextArea(queryEditorTextArea, {
       lineNumbers: true,
       tabSize: 4,
       smartIndent: true,
       matchBrackets: true,
     });
 
-    codeEditor.on('change', function (e, t) {
+    queryEditor.on('change', function (e, t) {
       refreshQueryAudience();
     });
   }
+
+  if (payloadEditorTextArea) {
+    payloadEditor = CodeMirror.fromTextArea(payloadEditorTextArea, {
+      lineNumbers: true,
+      tabSize: 4,
+      smartIndent: true,
+      matchBrackets: true,
+    });
+  }
+
   </script>
 </body>
 </html>

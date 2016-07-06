@@ -14,10 +14,17 @@ $(document).ready(function () {
   var password = data[1];
   var instance = data[2];
 
-  $.get("https://" + instance + "/apps?username=" + username, function (data) {
-    var appList = data.appList;
-    for (var app of appList) {
-      $('#appsDropdown').append(`<li><a data-appid='${app.appId}' onclick='selectApp(this);'>${app.name}</a></li>`);
+  $.ajax({
+    url: "https://" + instance + "/apps?username=" + username,
+    type: 'get',
+    headers: {'x-authorization-type' : 'user'},
+    contentType: "application/json",
+    dataType: 'json',
+    success: function (data) {
+      var appList = data.appList;
+      for (var app of appList) {
+        $('#appsDropdown').append(`<li><a data-appid='${app.appId}' onclick='selectApp(this);'>${app.name}</a></li>`);
+      }
     }
   });
 
@@ -43,20 +50,16 @@ function refreshQueryAudience() {
   var password = data[1];
   var instance = data[2];
 
-  var query = {};
-
-  var shouldReturnPrematurely = false;
-
-  var query = codeEditor.getValue();
+  var query = queryEditor.getValue();
   console.log("Typed query: " + query);
   if (!query  || query.length == 0) query = "{}"
   query = JSON.parse(query);
 
   $.ajax({
-    url: "https://" + instance + "/device/query",
+    url: "https://" + instance + "/push/reach",
     type: 'post',
     data: JSON.stringify({query: query}),
-    headers: {},
+    headers: {'x-authorization-type' : 'user'},
     contentType: "application/json",
     dataType: 'json',
     success: function (data) {
@@ -68,35 +71,8 @@ function refreshQueryAudience() {
 
 }
 
-function addPayloadField() {
-  $.get('/static/partials/payloadRow.partial', function(result) {
-    $('.payloadForm').append(result);
-  });
-}
-
-function removePayloadField() {
-  $('.payloadForm').children('.row').last().remove();
-}
-
-function addQueryField() {
-  $('.queryForm').children('.queryAll').first().remove();
-  $.get('/static/partials/queryRow.partial', function(result) {
-    $('.queryForm').append(result);
-  });
-}
-
-function removeQueryField() {
-  if ($('.queryForm').children('.row').length == 1) {
-    $('.queryForm').html("<h2 class='queryAll'>All</h2>");
-  } else {
-    $('.queryForm').children('.row').last().remove();
-  }
-}
 
 function fireTheIonCannon() {
-
-  var increaseBadge = $("#payloadIncreaseBadge").is(":checked");
-
   var authenticationData = Cookies.get("authenticationData");
   var data = authenticationData.split("%***&&&***%");
   var username = data[0];
@@ -115,80 +91,47 @@ function fireTheIonCannon() {
     return;
   }
 
-  var query = {};
+  var query = queryEditor.getValue();
+  console.log("Typed query: " + query);
+  if (!query  || query.length == 0) query = "{}"
+  query = JSON.parse(query);
 
-  var shouldReturnPrematurely = false;
+  var payload = payloadEditor.getValue();
+  console.log("Typed payload: " + payload);
+  if (!payload  || payload.length == 0) payload = "{}"
+  payload = JSON.parse(payload);
 
-  $('.queryForm').children('.row').each(function () {
-    var field = $(this).find('#queryField').first().val();
-    var value = $(this).find('#queryValue').first().val();
-
-    if (field.length == 0 || value.length == 0) {
-      swal({
-        title: "Did not send",
-        text: "<h3>Error: one (or more) of the query fields/values are empty.</h3>",
-        type:"error",
-        html: true
-      });
-      shouldReturnPrematurely = true;
-    }
-    query[field] = value;
-  });
-
-  var payload = {};
-
-  var alertText = $('.payloadForm').find('#payloadAlert').first().val();
-
-  if (alertText.length == 0) {
+  if (!payload.alert || payload.alert.length == 0) {
     swal({
       title: "Did not send",
       text: "<h3>Alert text cannot be empty</h3>",
       type:"error",
       html: true
     });
-    shouldReturnPrematurely = true;
-  }
-
-  payload.alert = alertText;
-  if (increaseBadge == true) payload.badge = "+";
-
-  $('.payloadForm').children('.row').each(function () {
-    var field = $(this).find('#payloadField').first().val();
-    var value = $(this).find('#payloadValue').first().val();
-
-    if (field.length == 0 || value.length == 0) {
-      swal({
-        title: "Did not send",
-        text: "<h3>One (or more) of the payload fields/values are empty.</h3>",
-        type:"error",
-        html: true
-      });
-      shouldReturnPrematurely = true;
-    }
-    payload[field] = value;
-  });
-
-  if (shouldReturnPrematurely == true) {
     return;
   }
 
   console.log('JSON: ' + JSON.stringify({query: query, payload : payload}));
 
+  var env = "d";
+
+  if ($('#isProduction').is(":checked")) env = "p"
+
   swal({
     title: "Are you sure you want to send those pushes?",
-    text: "<h4>Alert: '" + alertText + "'<br><br>Recipients: " + pushEstimatedAudience + "</h4>",
+    text: "<h4>Alert: '" + payload.alert + "'<br><br>Recipients: " + pushEstimatedAudience + "</h4>",
     type: "info",
     showCancelButton: true,
     closeOnConfirm: false,
     showLoaderOnConfirm: true,
     html: true
     },
-    function(){
+    function() {
       $.ajax({
-        url: "https://" + instance + "/push?appId=" + appId ,
+        url: "https://" + instance + "/push?appId=" + appId + "&env=" + env ,
         type: 'post',
         data: JSON.stringify({query: query, payload : payload}),
-        headers: {},
+        headers: {'x-authorization-type' : 'user'},
         contentType: "application/json",
         dataType: 'json',
         success: function (data) {
