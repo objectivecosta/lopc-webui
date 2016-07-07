@@ -23,7 +23,7 @@ $(document).ready(function () {
     success: function (data) {
       var appList = data;
       for (var app of appList) {
-        $('#appsDropdown').append(`<li><a data-appid='${app.appId}' onclick='selectApp(this);'>${app.name}</a></li>`);
+        $('#appsDropdown').append(`<li><a data-appid='${app._id}' onclick='selectApp(this);'>${app.name}</a></li>`);
       }
     }
   });
