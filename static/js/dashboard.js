@@ -21,7 +21,7 @@ $(document).ready(function () {
     contentType: "application/json",
     dataType: 'json',
     success: function (data) {
-      var appList = data.appList;
+      var appList = data;
       for (var app of appList) {
         $('#appsDropdown').append(`<li><a data-appid='${app.appId}' onclick='selectApp(this);'>${app.name}</a></li>`);
       }
@@ -110,8 +110,6 @@ function fireTheIonCannon() {
     });
     return;
   }
-
-  console.log('JSON: ' + JSON.stringify({query: query, payload : payload}));
 
   var env = "d";
 
