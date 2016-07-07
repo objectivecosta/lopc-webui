@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="/static/css/dashboard.css" media="screen" charset="utf-8">
 
-<div class="header">
+<!-- <div class="header">
   <h1>Compose new push</h1>
   <p>Compose a new alert that will appear in mobile applications</p>
-</div>
+</div> -->
 
 <div class="input-group">
   <div class="input-group-btn">
@@ -24,6 +24,9 @@
   <input type="text" id="appIdField" class="form-control" aria-label="...">
 </div><!-- /input-group -->
 
+<h3> Production environment: </h3>
+<input id="isProduction" type="checkbox" class="js-switch" checked />
+
 <form class="pushForm">
   <h2>Query:</h2>
 
@@ -33,22 +36,11 @@
 
   <h3 class="expectedAudience">Expected audience size: unknown</h3>
   <h2>Payload:</h2>
-  <div id="payloadControl">
-    <button onclick="removePayloadField();" class="btn btn-default" type="button" aria-haspopup="true" aria-expanded="true">
-      Remove Payload Field
-    </button>
 
-    <button onclick="addPayloadField();" class="btn btn-default" type="button" aria-haspopup="true" aria-expanded="true">
-      Add Payload Field
-    </button>
+  <div class="payloadEditor">
+    <textarea class="payloadEditorTextArea"></textarea>
   </div>
-  <div class="payloadForm">
-    <div class="input-group">
-      <span class="input-group-addon" id="sizing-addon2">Alert*</span>
-      <input type="text" id="payloadAlert" class="form-control" aria-label="...">
-    </div><!-- /input-group -->
-    <input class="checkBox" id="payloadIncreaseBadge" type="checkbox">    Increase app badge? (iOS only)<br>
-  </div><!-- /.payloadForm -->
+
   <div id="dashboardBottom">
     <button onclick="fireTheIonCannon();" class="btn btn-default btn-lg" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
       Fire the push away!
